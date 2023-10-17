@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -4941,6 +4941,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		B1429E9C1AAA651C003DE546 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -5546,7 +5547,11 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = ResearchKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5566,7 +5571,11 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = ResearchKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5610,7 +5619,11 @@
 				INFOPLIST_OUTPUT_FORMAT = binary;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.1.1;
 				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MODULEMAP_PRIVATE_FILE = "";
@@ -5687,27 +5700,31 @@
 				INFOPLIST_OUTPUT_FORMAT = binary;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2.1.1;
-				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
-				MODULEMAP_PRIVATE_FILE = "";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PLIST_FILE_OUTPUT_FORMAT = binary;
-				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = ResearchKit;
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				SKIP_INSTALL = YES;
-				STRINGS_FILE_OUTPUT_ENCODING = binary;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
-				SWIFT_VERSION = 5.0;
-				SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/ResearchKit/PrivateHeaders";
-				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/ResearchKit/PrivateHeaders";
-				TARGETED_DEVICE_FAMILY = 1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+        MARKETING_VERSION = 2.1.1;
+        MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
+        MODULEMAP_PRIVATE_FILE = "";
+        MTL_ENABLE_DEBUG_INFO = NO;
+        PLIST_FILE_OUTPUT_FORMAT = binary;
+        PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
+        PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
+        PRODUCT_NAME = ResearchKit;
+        PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+        SKIP_INSTALL = YES;
+        STRINGS_FILE_OUTPUT_ENCODING = binary;
+        SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+        SUPPORTS_MACCATALYST = NO;
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+        SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule"; 
+        SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
+        SWIFT_VERSION = 5.0;
+        SYSTEM_FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/ResearchKit/PrivateHeaders";
+        SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/ResearchKit/PrivateHeaders";
+        TARGETED_DEVICE_FAMILY = 1;
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
 					"-Wextra",

@@ -47,6 +47,9 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     var waitStepUpdateTimer: Timer?
     var waitStepProgress: CGFloat = 0.0
 
+    // In-memory store for taskViewController restoration data
+    var restorationDataByTaskID: [String:Data] = [:]
+    
     // MARK: Types
     
     enum TableViewCellIdentifier: String {
@@ -115,17 +118,19 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         // Create a task from the `TaskListRow` to present in the `ORKTaskViewController`.
         let task = taskListRow.representedTask
         
-        /*
-         Passing `nil` for the `taskRunUUID` lets the task view controller
-         generate an identifier for this run of the task.
-         */
-        let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
-        
-        // Make sure we receive events from `taskViewController`.
-        taskViewController.delegate = self
-        
-        // Assign a directory to store `taskViewController` output.
-        taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let taskViewController: ORKTaskViewController
+        if let restorationData = restorationDataByTaskID[task.identifier] {
+            
+            // we have data we can use to recreate the state of a previous taskViewController
+            taskViewController = ORKTaskViewController(task: task, restorationData: restorationData, delegate: self, error: nil)
+        } else {
+            
+            // making a brand new taskViewController
+            taskViewController = ORKTaskViewController(task: task, ongoingResult: nil, defaultResultSource: nil, delegate: self)
+
+            // Assign a directory to store `taskViewController` output.
+            taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        }
         
         /*
          We present the task directly, but it is also possible to use segues.
@@ -147,6 +152,34 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             view controller.
         */
         taskResultFinishedCompletionHandler?(taskViewController.result)
+        
+        switch (reason) {
+        case .saved:
+            saveRestorationDataFor(taskViewController);
+            break;
+            
+        case .discarded:
+            /* If the user chose to discard the edits, we also remove previous restorationData.
+             This way, if the user launches the same task again, it'll behave like it's been
+             launched for the first time.
+             */
+            resetRestorationDataFor(taskViewController);
+            break;
+
+        case .completed, .earlyTermination, .failed:
+            // For any other reason, we also reset restoration data
+            resetRestorationDataFor(taskViewController);
+
+            // For testing tintColor propagation: specifically for the tintColor task
+            if taskViewController.result.identifier == String(describing: TaskListRow.Identifier.tintColorTask) {
+                updateForTintColorTaskResult(taskViewController.result)
+            }
+
+            break;
+
+        default:
+            break;
+        }
         
         taskViewController.dismiss(animated: true, completion: nil)
     }
@@ -178,6 +211,10 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         }
     }
     
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
     func delay(_ delay: Double, closure: @escaping () -> Void ) {
         let delayTime = DispatchTime.now() + delay
         let dispatchWorkItem = DispatchWorkItem(block: closure)
@@ -201,6 +238,47 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         } else {
             self.waitStepUpdateTimer?.invalidate()
         }
+    }
+    
+    /* Once saved in-memory, the user can later bring up the same task and start off where they left off.
+     This works only until the app relaunches since we don't save the restorationData to disk
+     */
+    func saveRestorationDataFor(_ taskViewController: ORKTaskViewController) {
+        guard let taskID = taskViewController.task?.identifier else {
+            return
+        }
+        
+        restorationDataByTaskID[taskID] = taskViewController.restorationData
+    }
+
+    func resetRestorationDataFor(_ taskViewController: ORKTaskViewController) {
+        guard let taskID = taskViewController.task?.identifier else {
+            return
+        }
+        
+        restorationDataByTaskID[taskID] = nil
+    }
+
+    // MARK: Helpers
+
+    func updateForTintColorTaskResult(_ taskResult: ORKTaskResult) {
+        let stepIdentifier = String(describing: TaskListRow.Identifier.tintColorStep)
+        let stepResult = taskResult.stepResult(forStepIdentifier: stepIdentifier)
+
+        let questionResultIdentifier = String(describing: TaskListRow.Identifier.tintColorQuestion)
+        let result = stepResult?.result(forIdentifier: questionResultIdentifier)
+        guard let questionResult = result as? ORKChoiceQuestionResult else {
+            fatalError("Expected tintColor task result to have a result of type ORKChoiceQuestionResult for identifier \(questionResultIdentifier)")
+        }
+        guard
+            let colorName = questionResult.choiceAnswers?.first as? String,
+            let color = UIColor.value(forKey: colorName) as? UIColor
+        else {
+            fatalError("Couldn't create a color from question result \(questionResult)")
+        }
+
+        // Finally, set the tintColor
+        self.view.window?.tintColor = color
     }
 
 }
