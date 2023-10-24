@@ -30,6 +30,7 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "동의";
+"CONSENT_NAME_SECTION_TITLE" = "이름";
 "CONSENT_NAME_GIVEN" = "이름";
 "CONSENT_NAME_FAMILY" = "성";
 "CONSENT_NAME_PLACEHOLDER" = "필요함";
