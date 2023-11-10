@@ -1335,13 +1335,13 @@ static const NSTimeInterval DelayBeforeAutoScroll = 0.25;
                 sectionProgressText = [NSString localizedStringWithFormat:ORKLocalizedString(@"FORM_ITEM_PROGRESS", nil) ,ORKLocalizedStringFromNumber(@(section + progressInfo.currentStepStartingProgressPosition)), ORKLocalizedStringFromNumber(@(progressInfo.total))];
             }
         }
-        
-        if (!sectionProgressText) {
-            // only display progress label if there are more than 1 sections in the form step
-            if ([_sections count] > 1) {
-             sectionProgressText = [NSString localizedStringWithFormat:ORKLocalizedString(@"FORM_ITEM_PROGRESS", nil) ,ORKLocalizedStringFromNumber(@(section + 1)), ORKLocalizedStringFromNumber(@([_sections count]))];
-            }
-        }
+        // TODO: Commented because it was unreliable -- section labels for form steps will never come out (11/10)
+//        if (!sectionProgressText) {
+//            // only display progress label if there are more than 1 sections in the form step
+//            if ([_sections count] > 1) {
+//             sectionProgressText = [NSString localizedStringWithFormat:ORKLocalizedString(@"FORM_ITEM_PROGRESS", nil) ,ORKLocalizedStringFromNumber(@(section + 1)), ORKLocalizedStringFromNumber(@([_sections count]))];
+//            }
+//        }
     }
     
     if (_sections[section].learnMoreItem) {
