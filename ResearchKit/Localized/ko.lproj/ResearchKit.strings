@@ -688,3 +688,30 @@
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "초기화를 위한 restoreData 디코딩을 할 수 없음";
+
+/* ADDED 12/08 */
+/* Request Permission Step */
+"REQUEST_PERMISSION_BUTTON_STATE_DEFAULT" = "허용하기";
+"REQUEST_PERMISSION_BUTTON_STATE_CONNECTED" = "허용됨";
+"REQUEST_PERMISSION_BUTTON_STATE_NOT_SUPPORTED" = "지원하지 않음";
+"REQUEST_PERMISSION_BUTTON_STATE_ERROR" = "오류";
+
+/* Request Health Data Step */
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "건강 데이터";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "건강 데이터를 수집하기 위해 허용해 주세요.";
+
+/* Request Notification Permission Step */
+"REQUEST_NOTIFICATIONS_STEP_VIEW_TITLE" = "알림";
+"REQUEST_NOTIFICATIONS_STEP_VIEW_DESCRIPTION" = "알림을 보내기 위해 허용해 주세요.";
+
+/* Request Sensor Permission Step */
+"REQUEST_SENSOR_STEP_VIEW_TITLE" = "센서 데이터";
+"REQUEST_SENSOR_STEP_VIEW_DESCRIPTION" = "센서 데이터를 접근하기 위해 허용해 주세요.";
+
+/* Request Device Motion Permission Step */
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_TITLE" = "디바이스 모션";
+"REQUEST_MOTION_ACTIVITY_STEP_VIEW_DESCRIPTION" = "디바이스의 움직임 데이터를 수집하기 위해 허용해 주세요.";
+
+/* Request Location Permission Step */
+"REQUEST_LOCATION_DATA_STEP_VIEW_TITLE" = "위치 데이터";
+"REQUEST_LOCATION_DATA_STEP_VIEW_DESCRIPTION" = "위치 데이터를 수집하기 위해 허용해 주세요.";
