@@ -220,7 +220,7 @@
 "BUTTON_SKIP_QUESTION" = "이 질문 건너뛰기";
 "BUTTON_START_TIMER" = "타이머 시작";
 "BUTTON_OPTION_SAVE" = "나중을 위해 저장";
-"BUTTON_OPTION_DISCARD" = "결과 삭제";
+"BUTTON_OPTION_DISCARD" = "설문 닫기";
 "BUTTON_OPTION_STOP_TASK" = "과제 종료";
 "BUTTON_SAVE" = "저장";
 "BUTTON_CLEAR_ANSWER" = "대답 지우기";
